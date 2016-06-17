@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import numpy as np
 import matplotlib.dates as mdates
+import matplotlib.patches as mpatches
 import scipy
 
 #read in the CSV and store it in a huge array
@@ -200,6 +201,10 @@ plt.plot(time_nor,time_avg)
 plt.title(title + " data for " + loc_name + " | avg:" + str(np.mean(time_avg)) + " per.5 micro meter/ft^3")
 plt.ylabel('Particle Count per.5 micro meter/ft^3')
 plt.xlabel('Time in hours')
+#plt.legend(" | avg:" + str(np.mean(time_avg)) + " per.5 micro meter/ft^3")
+patch = mpatches.Patch(color='blue', label='avg:' + str(np.mean(time_avg)) + ' per.5 micro meter/ft^3')
+plt.legend(handles=[patch])
+
 plt.show()
 
 # -- END ANALYSIS CODE -- #
