@@ -1,14 +1,16 @@
-#csv reader - inspired by: https://newcircle.com/s/post/1572/python_for_beginners_reading_and_manipulating_csv_files#opening-a-csv-file
+
 # Author: Joseph Mammo
-import csv #import csv reader
+# Analysis: O(n) ~ has the potential to be improved to O(ln(n))!
+
+#Import the required libraries
+import csv 
 import matplotlib.pyplot as plt
 from datetime import datetime
-#read in the CSV and store it in a huge array
-
 import numpy as np
 import matplotlib.dates as mdates
 import scipy
 
+#read in the CSV and store it in a huge array
 f = open('MetOneAll.csv')
 csv_f = csv.reader(f)
 
@@ -50,8 +52,11 @@ for row in csv_f:
 loc_data_occ = []
 loc_data_uocc = []
 loc_data = []
+info = '1 = Davis Campus Common Corridor; 2 = LL Cavern NE Corner; 3 = Surface IH Office; 4 = Transition W_D; 5 = E Count Room NW Corner; 6 = E Count Room W Wall; 7 = E Count Room'
+print(info)
 loc_num = int(input("Enter a number from 1 - 7: ")) # 1 = csv_dvs, 2 = csv_crn, 3 = csv_srf, 4 = csv_trs, 5 = csv_ecntrm, 6 = csv_ewall, 7 = csv_ecntrmm
 loc_name = ""
+
 if(loc_num == 1):
     for row in csv_dvs:
         loc_data.append(row)
@@ -80,6 +85,7 @@ elif(loc_num == 7):
     for row in csv_ecntrmm:
         loc_data.append(row)
     loc_name = "E Count Room"
+    
 #Occupied - unoccupied splitter
 for row in loc_data:
     # print row[0]
@@ -118,17 +124,7 @@ for row in loc_data_occ:
 #plt.plot(x_val, y_val)
 #plt.show()
 
-# -- END ANALYSIS CODE -- #
-
-#tester!
-for row in csv_dvs:
-    # print row[0]
-    date_object = datetime.strptime(row[0], '%m/%d/%Y %H:%M')
-    #print(date_object.weekday()) #only 0 - 4 are needed
-    h = (date_object - date_object.replace(hour=0,minute=0,second=0)).seconds / 3600.
-    if((date_object.weekday() == 0 or date_object.weekday() == 1 or date_object.weekday() == 2 or date_object.weekday() == 3 or date_object.weekday() == 4) and (h >=8 and h < 18)):
-        csv_dvs_srt.append(row)
-#END tester
+# END Occupied - unoccupied splitter
 
 #Hourly Plotter
 inpt = int(input("Enter 1 for occupied and 2 for unoccupied: ")) # 1 = occupied and 2 = unoccupied
@@ -196,8 +192,12 @@ time_avg.append(np.mean(th))
 time_avg.append(np.mean(fo))
 time_avg.append(np.mean(fi))
 
+for row in time_avg:
+    print(row)
 plt.plot(time_nor,time_avg)
 plt.title(title + " data for " + loc_name + " | avg:" + str(np.mean(time_avg)) + " per.5 micro meter/ft^3")
-plt.ylabel('Particle Count')
+plt.ylabel('Particle Count per.5 micro meter/ft^3')
 plt.xlabel('Time in hours')
 plt.show()
+
+# -- END ANALYSIS CODE -- #
