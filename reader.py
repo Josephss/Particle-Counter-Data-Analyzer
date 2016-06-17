@@ -1,6 +1,7 @@
 
 # Author: Joseph Mammo
 # Analysis: O(n) ~ has the potential to be improved to O(ln(n))!
+# Current features: - Take in row csv file and hourly plot the occupied and unoccupied data of the a specific location
 
 #Import the required libraries
 import csv 
@@ -192,8 +193,9 @@ time_avg.append(np.mean(th))
 time_avg.append(np.mean(fo))
 time_avg.append(np.mean(fi))
 
-for row in time_avg:
-    print(row)
+#for row in time_avg:
+   # print(row)
+   
 plt.plot(time_nor,time_avg)
 plt.title(title + " data for " + loc_name + " | avg:" + str(np.mean(time_avg)) + " per.5 micro meter/ft^3")
 plt.ylabel('Particle Count per.5 micro meter/ft^3')
