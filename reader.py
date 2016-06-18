@@ -1,7 +1,7 @@
 
 # Author: Joseph Mammo
 # Analysis: O(n) ~ has the potential to be improved to O(ln(n))!
-# Current features: - Take in row csv file and hourly plot the occupied and unoccupied data of the a specific location
+# Current features: - Take in row csv file and hourly and monthly plot the occupied and unoccupied data of the a specific location
 
 #Import the required libraries
 import csv 
@@ -129,7 +129,7 @@ for row in loc_data_occ:
 # END Occupied - unoccupied splitter
 
 #Hourly Plotter
-inpt = int(input("Enter 1 for occupied and 2 for unoccupied: ")) # 1 = occupied and 2 = unoccupied
+inpt = int(input("Hourly plotter: Enter 1 for occupied and 2 for unoccupied: ")) # 1 = occupied and 2 = unoccupied
 time_grapher = []
 
 if(inpt == 1):
@@ -204,7 +204,84 @@ plt.xlabel('Time in hours')
 #plt.legend(" | avg:" + str(np.mean(time_avg)) + " per.5 micro meter/ft^3")
 patch = mpatches.Patch(color='blue', label='avg:' + str(np.mean(time_avg)) + ' per.5 micro meter/ft^3')
 plt.legend(handles=[patch])
-
 plt.show()
 
+
+# Monthly Plotter
+inptt = int(input("Monthly plot: enter 1 for occupied and 2 for unoccupied: "))
+monthly_grapher = []
+
+month_nor = [1,2,3,4,5,6,7,8,9,10,11,12]
+month_avg = []
+
+jan = []
+feb = []
+mar = []
+apr = []
+may = []
+jun = []
+jul = []
+aug = []
+sep = []
+octt = []
+nov = []
+dec = []
+
+if(inptt == 1):
+    for row in loc_data_occ:
+        monthly_grapher.append(row)
+        mon_title = "Occupied Data"
+elif(inptt == 2):
+    for row in loc_data_uocc:
+        monthly_grapher.append(row)
+        mon_title = "Unoccupied Data"
+        
+for row in monthly_grapher:
+    month_object = datetime.strptime(row[0], '%m/%d/%Y %H:%M')
+    m = month_object.month
+    if(m == 1):
+        jan.append(int(row[1]))
+    elif(m == 2):
+        feb.append(int(row[1]))
+    elif(m == 3):
+        mar.append(int(row[1]))
+    elif(m == 4):
+        apr.append(int(row[1]))
+    elif(m == 5):
+        may.append(int(row[1]))
+    elif(m == 6):
+        jun.append(int(row[1]))
+    elif(m == 7):
+        jul.append(int(row[1]))
+    elif(m == 8):
+        aug.append(int(row[1]))
+    elif(m == 9):
+        sep.append(int(row[1]))
+    elif(m == 10):
+        octt.append(int(row[1]))
+    elif(m == 11):
+        nov.append(int(row[1]))
+    elif(m == 12):
+        dec.append(int(row[1]))
+        
+month_avg.append(np.mean(jan))
+month_avg.append(np.mean(feb))
+month_avg.append(np.mean(mar))
+month_avg.append(np.mean(apr))
+month_avg.append(np.mean(may))
+month_avg.append(np.mean(jun))
+month_avg.append(np.mean(jul))
+month_avg.append(np.mean(aug))
+month_avg.append(np.mean(sep))
+month_avg.append(np.mean(octt))
+month_avg.append(np.mean(nov))
+month_avg.append(np.mean(dec))
+
+plt.plot(month_nor,month_avg)
+plt.title(title + " data for " + loc_name + " | avg:" + str(np.mean(month_avg)) + " per.5 micro meter/ft^3")
+plt.ylabel('Particle Count per.5 micro meter/ft^3')
+plt.xlabel('Months')
+patch = mpatches.Patch(color='blue', label='avg:' + str(np.mean(month_avg)) + ' per.5 micro meter/ft^3')
+plt.legend(handles=[patch])
+plt.show()
 # -- END ANALYSIS CODE -- #
