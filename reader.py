@@ -28,6 +28,9 @@ csv_ewall = [] # E Count Room W Wall data
 csv_ecntrmm = [] # E Count Room data
 csv_dvs = [] # Common Corridor Refrig data
 csv_dvs_srt = [] # organized Common Corridor Refrig data -- weekdays from 8 to 5
+csv_mdjdrm = [] # MDJ Detector Room
+csv_mdjmrm = [] # MDJ Machine Room
+csv_bhsubrm = [] # BHSU Brick Room
 
 #Parameter - location data -> array
 for row in csv_f:
@@ -45,6 +48,12 @@ for row in csv_f:
         csv_ewall.append(row)
     if(row[2] == "E Count Room"):
         csv_ecntrmm.append(row)
+    if(row[2] == "MDJ Detector Room"):
+        csv_mdjdrm.append(row)
+    if(row[2] == "MDJ Machine Room"):
+        csv_mdjmrm.append(row)
+    if(row[2] == "BHSU Brick Room"):
+        csv_bhsubrm.append(row)
 #plt.plot(csv_dvs)
 
 
@@ -54,9 +63,9 @@ for row in csv_f:
 loc_data_occ = []
 loc_data_uocc = []
 loc_data = []
-info = '1 = Davis Campus Common Corridor; 2 = LL Cavern NE Corner; 3 = Surface IH Office; 4 = Transition W_D; 5 = E Count Room NW Corner; 6 = E Count Room W Wall; 7 = E Count Room'
+info = '1 = Davis Campus Common Corridor; 2 = LL Cavern NE Corner; 3 = Surface IH Office; 4 = Transition W_D; 5 = E Count Room NW Corner; 6 = E Count Room W Wall; 7 = E Count Room; 8 = MDJ Detector Room; 9 = MDJ Machine Room; 10 = BHSU Brick Room'
 print(info)
-loc_num = int(input("Enter a number from 1 - 7: ")) # 1 = csv_dvs, 2 = csv_crn, 3 = csv_srf, 4 = csv_trs, 5 = csv_ecntrm, 6 = csv_ewall, 7 = csv_ecntrmm
+loc_num = int(input("Enter a number from 1 - 10: ")) # 1 = csv_dvs, 2 = csv_crn, 3 = csv_srf, 4 = csv_trs, 5 = csv_ecntrm, 6 = csv_ewall, 7 = csv_ecntrmm
 loc_name = ""
 
 if(loc_num == 1):
@@ -87,7 +96,20 @@ elif(loc_num == 7):
     for row in csv_ecntrmm:
         loc_data.append(row)
     loc_name = "E Count Room"
-    
+elif(loc_num == 8):
+    for row in csv_mdjdrm:
+        loc_data.append(row)
+    loc_name = "MDJ Detector Room"
+elif(loc_num == 9):
+    for row in csv_mdjmrm:
+        loc_data.append(row)
+    loc_name = "MDJ Machine Room"
+elif(loc_num == 10):
+    for row in csv_bhsubrm:
+        loc_data.append(row)
+    loc_name = "BHSU Brick Room"
+else:
+    print("ERROR: Please input a valid number!")
 #Occupied - unoccupied splitter
 for row in loc_data:
     # print row[0]
@@ -182,18 +204,49 @@ for row in time_grapher:
     elif (h == 17):
         fi.append(int(row[1]))
         
-#if val == nan, enter 0! -- fix        
-time_avg.append(np.mean(e))
-time_avg.append(np.mean(n))
-time_avg.append(np.mean(t))
-time_avg.append(np.mean(el))
-time_avg.append(np.mean(twl))
-time_avg.append(np.mean(o))
-time_avg.append(np.mean(tw))
-time_avg.append(np.mean(th))
-time_avg.append(np.mean(fo))
-time_avg.append(np.mean(fi))
-
+#if val == nan, enter 0! -- fix
+if(np.mean(e) > 0):
+    time_avg.append(np.mean(e))
+else:
+    time_avg.append(0)
+if(np.mean(n) > 0):
+    time_avg.append(np.mean(n))
+else:
+    time_avg.append(0)
+if(np.mean(t) > 0):
+    time_avg.append(np.mean(t))
+else:
+    time_avg.append(0)
+if(np.mean(el) > 0):
+    time_avg.append(np.mean(el))
+else:
+    time_avg.append(0)
+if(np.mean(twl) > 0):
+    time_avg.append(np.mean(twl))
+else:
+    time_avg.append(0)
+if(np.mean(o) > 0):
+    time_avg.append(np.mean(o))
+else:
+    time_avg.append(0)
+if(np.mean(tw) > 0):
+    time_avg.append(np.mean(tw))
+else:
+    time_avg.append(0)
+if(np.mean(th) > 0):
+    time_avg.append(np.mean(th))
+else:
+    time_avg.append(0)
+if(np.mean(fo) > 0):
+    time_avg.append(np.mean(fo))
+else:
+    time_avg.append(0)
+if(np.mean(fi) > 0):
+    time_avg.append(np.mean(fi))
+else:
+    time_avg.append(0)
+    
+    
 # Calculates the average for valid values
 dynamic_avg_time = []
 ctt = 0
