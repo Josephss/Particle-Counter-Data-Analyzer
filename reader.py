@@ -1,7 +1,7 @@
 
 # Author: Joseph Mammo
 # Analysis: O(n) ~ has the potential to be improved to O(ln(n))!
-# Current features: - Take in row csv file and hourly and monthly plot the occupied and unoccupied data of the a specific location
+# Current features: - Take in row csv file and hourly and monthly plot the occupied and unoccupied data of the a specific locations
 
 #Import the required libraries
 import csv 
@@ -271,7 +271,7 @@ plt.title(title + " data for " + loc_name + " | avg:" + str(np.mean(dynamic_avg_
 plt.ylabel('Particle Count per.5 micro meter/ft^3')
 plt.xlabel('Time in hours')
 #plt.legend(" | avg:" + str(np.mean(time_avg)) + " per.5 micro meter/ft^3")
-patch = mpatches.Patch(color='blue', label='avg:' + str(np.mean(dynamic_avg_time)) + ' per.5 micro meter/ft^3')
+patch = mpatches.Patch(color='blue', label='Mean:' + str(np.mean(dynamic_avg_time)) + ' per.5 micro meter/ft^3' + "\n" + 'Median: ' + str(np.median(dynamic_avg_time)) + ' per.5 micro meter/ft^3' + "\n" + 'Max: ' + str(np.max(dynamic_avg_time)) + ' per.5 micro meter/ft^3' + "\n" + " Min: " + str(np.min(dynamic_avg_time)) + ' per.5 micro meter/ft^3')
 plt.legend(handles=[patch])
 plt.show()
 
