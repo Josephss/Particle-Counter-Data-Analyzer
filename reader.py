@@ -194,20 +194,38 @@ time_avg.append(np.mean(th))
 time_avg.append(np.mean(fo))
 time_avg.append(np.mean(fi))
 
-#for row in time_avg:
-   # print(row)
-   
+# Calculates the average for valid values
+dynamic_avg_time = []
+ctt = 0
+for row in time_avg:
+    if (row > 0):
+        dynamic_avg_time.append(row)
+    else:
+        ctt +=1
+        
+def caution():
+    print("=========================================================================================")
+    print(" ")
+    print("ATTENTION:" + str(ctt) + " invalid values have been excluded from the average.")
+    print(" ")
+    print("=========================================================================================")
+    return
+if (ctt != 0):
+    caution()
+    
 plt.plot(time_nor,time_avg)
-plt.title(title + " data for " + loc_name + " | avg:" + str(np.mean(time_avg)) + " per.5 micro meter/ft^3")
+plt.title(title + " data for " + loc_name + " | avg:" + str(np.mean(dynamic_avg_time)) + " per.5 micro meter/ft^3")
 plt.ylabel('Particle Count per.5 micro meter/ft^3')
 plt.xlabel('Time in hours')
 #plt.legend(" | avg:" + str(np.mean(time_avg)) + " per.5 micro meter/ft^3")
-patch = mpatches.Patch(color='blue', label='avg:' + str(np.mean(time_avg)) + ' per.5 micro meter/ft^3')
+patch = mpatches.Patch(color='blue', label='avg:' + str(np.mean(dynamic_avg_time)) + ' per.5 micro meter/ft^3')
 plt.legend(handles=[patch])
 plt.show()
 
 
 # Monthly Plotter
+#TODO: need to separate data by year!
+
 inptt = int(input("Monthly plot: enter 1 for occupied and 2 for unoccupied: "))
 monthly_grapher = []
 
@@ -277,11 +295,31 @@ month_avg.append(np.mean(octt))
 month_avg.append(np.mean(nov))
 month_avg.append(np.mean(dec))
 
+# Calculates the average for valid values
+dynamic_avg = []
+ct = 0
+for row in month_avg:
+    if (row > 0):
+        dynamic_avg.append(row)
+    else:
+        ct +=1
+        
+def caution_month():
+    print("=========================================================================================")
+    print(" ")
+    print("ATTENTION:" + str(ct) + " invalid values have been excluded from the average.")
+    print(" ")
+    print("=========================================================================================")
+    return
+if (ct != 0):
+    caution_month()
+    
+    
 plt.plot(month_nor,month_avg)
-plt.title(title + " data for " + loc_name + " | avg:" + str(np.mean(month_avg)) + " per.5 micro meter/ft^3")
+plt.title(title + " data for " + loc_name + " | avg:" + str(np.mean(dynamic_avg)) + " per.5 micro meter/ft^3")
 plt.ylabel('Particle Count per.5 micro meter/ft^3')
 plt.xlabel('Months')
-patch = mpatches.Patch(color='blue', label='avg:' + str(np.mean(month_avg)) + ' per.5 micro meter/ft^3')
+patch = mpatches.Patch(color='blue', label='avg:' + str(np.mean(dynamic_avg)) + ' per.5 micro meter/ft^3')
 plt.legend(handles=[patch])
 plt.show()
 # -- END ANALYSIS CODE -- #
