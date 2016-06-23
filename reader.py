@@ -12,6 +12,13 @@ import matplotlib.dates as mdates
 import matplotlib.patches as mpatches
 import scipy
 
+import plotly 
+#from plotly.graph_objs import Scatter, Layout
+
+from plotly import tools
+import plotly.plotly as py
+import plotly.graph_objs as go
+
 #read in the CSV and store it in a huge array
 f = open('MetOneAll.csv')
 csv_f = csv.reader(f)
@@ -276,6 +283,7 @@ plt.legend(handles=[patch])
 plt.show()
 
 
+
 # Monthly Plotter
 #TODO: need to separate data by year!
 
@@ -335,18 +343,54 @@ for row in monthly_grapher:
     elif(m == 12):
         dec.append(int(row[1]))
         
-month_avg.append(np.mean(jan))
-month_avg.append(np.mean(feb))
-month_avg.append(np.mean(mar))
-month_avg.append(np.mean(apr))
-month_avg.append(np.mean(may))
-month_avg.append(np.mean(jun))
-month_avg.append(np.mean(jul))
-month_avg.append(np.mean(aug))
-month_avg.append(np.mean(sep))
-month_avg.append(np.mean(octt))
-month_avg.append(np.mean(nov))
-month_avg.append(np.mean(dec))
+if(np.mean(jan)):
+    month_avg.append(np.mean(jan))
+else:
+    month_avg.append(0)
+if(np.mean(feb)):
+    month_avg.append(np.mean(feb))
+else:
+    month_avg.append(0)
+if(np.mean(mar)):
+    month_avg.append(np.mean(mar))
+else:
+    month_avg.append(0)
+if(np.mean(apr)):
+    month_avg.append(np.mean(apr))
+else:
+    month_avg.append(0)
+if(np.mean(may)):
+    month_avg.append(np.mean(may))
+else:
+    month_avg.append(0)
+if(np.mean(jun)):
+    month_avg.append(np.mean(jun))
+else:
+    month_avg.append(0)
+if(np.mean(jul)):
+    month_avg.append(np.mean(jul))
+else:
+    month_avg.append(0)
+if(np.mean(aug)):
+    month_avg.append(np.mean(aug))
+else:
+    month_avg.append(0)
+if(np.mean(sep)):
+    month_avg.append(np.mean(sep))
+else:
+    month_avg.append(0)
+if(np.mean(octt)):
+    month_avg.append(np.mean(octt))
+else:
+    month_avg.append(0)
+if(np.mean(nov)):
+        month_avg.append(np.mean(nov))
+else:
+    month_avg.append(0)    
+if(np.mean(dec)):
+    month_avg.append(np.mean(dec))
+else:
+    month_avg.append(0)
 
 # Calculates the average for valid values
 dynamic_avg = []
@@ -369,10 +413,27 @@ if (ct != 0):
     
     
 plt.plot(month_nor,month_avg)
-plt.title(title + " data for " + loc_name + " | avg:" + str(np.mean(dynamic_avg)) + " per.5 micro meter/ft^3")
+plt.title(mon_title + " data for " + loc_name + " | avg:" + str(np.mean(dynamic_avg)) + " per.5 micro meter/ft^3")
 plt.ylabel('Particle Count per.5 micro meter/ft^3')
 plt.xlabel('Months')
 patch = mpatches.Patch(color='blue', label='avg:' + str(np.mean(dynamic_avg)) + ' per.5 micro meter/ft^3')
 plt.legend(handles=[patch])
 plt.show()
 # -- END ANALYSIS CODE -- #
+
+
+#plot the data on an HTML page
+trace1 = go.Scatter(
+    x=time_nor, y=time_avg, name = title
+)
+trace2 = go.Scatter(
+  x=month_nor, y=month_avg, name = mon_title,
+)
+
+fig = tools.make_subplots(rows=1, cols=2)
+
+fig.append_trace(trace1, 1, 1)
+fig.append_trace(trace2, 1, 2)
+
+fig['layout'].update(title= title + ' and ' + mon_title + ' plot of ' + loc_name)
+plotly.offline.plot(fig, filename = "Data.html")
