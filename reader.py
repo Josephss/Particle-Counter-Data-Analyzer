@@ -416,7 +416,8 @@ plt.plot(month_nor,month_avg)
 plt.title(mon_title + " data for " + loc_name + " | avg:" + str(np.mean(dynamic_avg)) + " per.5 micro meter/ft^3")
 plt.ylabel('Particle Count per.5 micro meter/ft^3')
 plt.xlabel('Months')
-patch = mpatches.Patch(color='blue', label='avg:' + str(np.mean(dynamic_avg)) + ' per.5 micro meter/ft^3')
+#patch = mpatches.Patch(color='blue', label='avg:' + str(np.mean(dynamic_avg)) + ' per.5 micro meter/ft^3')
+patch = mpatches.Patch(color='blue', label='Mean:' + str(np.mean(dynamic_avg)) + ' per.5 micro meter/ft^3' + "\n" + 'Median: ' + str(np.median(dynamic_avg)) + ' per.5 micro meter/ft^3' + "\n" + 'Max: ' + str(np.max(dynamic_avg)) + ' per.5 micro meter/ft^3' + "\n" + " Min: " + str(np.min(dynamic_avg)) + ' per.5 micro meter/ft^3')
 plt.legend(handles=[patch])
 plt.show()
 # -- END ANALYSIS CODE -- #
@@ -424,10 +425,10 @@ plt.show()
 
 #plot the data on an HTML page
 trace1 = go.Scatter(
-    x=time_nor, y=time_avg, name = title
+    x=time_nor, y=time_avg, name = 'Hourly ' + title
 )
 trace2 = go.Scatter(
-  x=month_nor, y=month_avg, name = mon_title,
+  x=month_nor, y=month_avg, name = 'Monthly ' + mon_title,
 )
 
 fig = tools.make_subplots(rows=1, cols=2)
