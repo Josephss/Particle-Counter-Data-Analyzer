@@ -4,7 +4,8 @@ Particle count data analyzer; takes in a consolidated csv file and returns a det
 
 Look how easy it is to use:
 
-    1) *Update* 'MetOneAll.csv' at the end of the document by following the exixtisting structure (Row 1: date, Row 2:CF-.5 data and Row 3: Location with an optional Row 4: serial number of the particle counter). Please insert the following words for the location row:
+    1) *Update* 'MetOneAll.csv' at the end of the document by following the exixtisting structure (Row 1: date, Row 2:CF-.5 data and Row 3: Location with an optional Row 4: serial number of the particle counter).
+    Please insert the following words for the location row:
     * Paticle counter located on the top the refrigrator of the davis campus: "Common Corridor Refrig" (without the quotes)
     * Particle counter inside MJD's clean room: "MJD Detector Room"
     * Particle counter inside MJD's machine room: "MJD Machine Room"
