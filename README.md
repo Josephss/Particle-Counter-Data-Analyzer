@@ -23,7 +23,7 @@ Features
 
 * Take in row csv file and hourly and monthly plot the occupied and unoccupied data of the a specific locations
   * Analyzer_Mathplot.py: takes in the consolidated 'MetOneAll.csv' file and gives out either occupied or unoccupied hourly and monthly plot of the specified location at savable image using matplotlib library. It also gives out an HTML plot of the final analyzed data. 
-  * Analyzer_Mathplot.py: takes in the consolidated 'MetOneAll.csv' file and gives out both the occupied and unccopied hourly and monthly plot of the specified location. 
+  * Analyzer_Plotly.py: takes in the consolidated 'MetOneAll.csv' file and gives out both the occupied and unccopied hourly and monthly plot of the specified location. 
 
 Installation
 ------------
