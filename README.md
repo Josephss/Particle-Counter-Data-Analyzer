@@ -15,7 +15,7 @@ Look how easy it is to use:
     * Particle counter located in E's count room: "E Count Room"
     * Particle counter located in E's counter room noth west corner: "E Count Room NW Corner
     * Particle counter located at the transition of from the entrace of the davis campus to the common corridor: "Transition W_D"
-    2) *Compile and run* 'Analyzer_Mathplot.py' or 'Analyzer_Plotly.py' based on your data output choice and follow the prompts to the required data analysis output
+    2) *Compile and run* 'Analyzer_Mathplot.py' or 'Analyzer_Plotly.py' based on your data output choice and follow the prompts for the required data analysis output
     
 
 Features
